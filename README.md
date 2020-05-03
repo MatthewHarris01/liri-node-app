@@ -13,3 +13,8 @@ Added code to detect the need to use the defaults for the 'spotify-this-song'com
 Added code to populate the Verb (command) and Item (what to search for) in the case that Liri is run with the 'spotify-this-song' command and no song argument.
 Added the code to carry out the "do-what-it-says" command (read from the random.tx file)
 Added stubbed procedures for all search commands. (next step will be to begin implementing searches).
+
+# Version 0.4
+Added code to be able to write a log of the application's actions. Completed OMDB search code, results are displayed in the terminal and logged to a file name 'Liri-log.txt'
+currently working on Bands In Town search.
+

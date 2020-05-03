@@ -1,27 +1,30 @@
-var FS = require("fs");
+var fs = require("fs");
 require("dotenv").config();
 chalk = require("chalk");
 var keys = require("./keys.js");
+var axios = require("axios");
+var moment = require("moment");
+var Spotify = require("spotify");
+
 
 var Verb =""; // global variable for the command to perform
 var Item =""; // global variable for the item to search for
+var LogFileName = InitLogFilePath(); // global variable for the log file path and name.
+
 
 //THE FOLLOWING STATEMENT PRODUCES A RUNTIME ERROR, "Spotify is not defined."
-// var spotify = new Spotify(keys.Spotify);  //this line may not work until the keys.js file is populated more fully.
-
-// console.log("spotify ID is: [" + keys.spotify.id + "]");
-
-// console.log("spotify secret is [" + keys.spotify.secret + "]");
+// var spotify = new spotify(keys.spotify);  //this line may not work until the keys.js file is populated more fully.
 
 var cmdList= ["concert-this", "spotify-this-song", "movie-this", "do-what-it-says", "help"];
 
 
-//liri exptects 2 arguments for all but one command, therefore if the total count of arguments is greater than 4, it is a fatal error
+//liri exptects 2 arguments for most commands, therefore if the total count of arguments is greater than 4, it is a fatal error
 var cmdCount = process.argv.length;
 var cmdIn = process.argv.slice(2);
-console.log("count of args after slice: " + cmdIn.length);
+// console.log("count of args after slice: " + cmdIn.length);
 
-//check for too few arguments -- NOTE: IF THE COMMAND IS "SPOTIFY-THIS" and there is no song argument, then default to "The Sign" by Ace of Base
+//check for too few arguments -- NOTE: IF THE COMMAND IS "SPOTIFY-THIS" or "movie-this" and there is no song or movie argument, 
+//then default to "The Sign" by Ace of Base (for spotify) and "Mr. Nobody" (for movie-this)
 
 if (cmdIn.length == 1){
   let s = cmdIn[0].toLowerCase();
@@ -30,19 +33,17 @@ if (cmdIn.length == 1){
     //yes, set default values
     console.log(chalk.yellow.bold("NEED TO SET SPOTIFY DEFAULT"));
     SetSpotifyDefaults();
+  } else if (s == "movie-this") {
+    //set hard-coded default for movie-this
+    SetMovieDefaults();
   }
 
-  //do we need to read the text file to get default command and item?
-
-
-  if (s != "do-what-it-says" && s != "help" && s != "spotify-this-song") {
-    BadArgumentsMsg("ERROR!! except for the commands \'do-what-it-says\' and \'help\' Liri expects at least 2 arguments! Please try again!");
+    // do-what-it says, help, spotify-this-song, and movie-this are allowed to be without a 2nd argument, as they have hard-coded defaults.
+  if (s != "do-what-it-says" && s != "help" && s != "spotify-this-song" && s != 'movie-this') {
+    BadArgumentsMsg("ERROR!! except for the commands \'do-what-it-says\',\'help\' and \'movie-this\' Liri expects at least 2 arguments! Please try again!");
   return;
 }
 }
-
-// console.log(chalk.yellow.bold("command arguments: " + cmdIn));
-// console.log("");
 
 // check whether there are too many arguments
 if (cmdIn.length > 2) {
@@ -60,28 +61,17 @@ function ParseArguments() {
 var searchname = process.argv.slice(2);
 process.argv.slice(2);
 
-// console.log("searchname after slice: [" + searchname + "]");
-// console.log("argv after slice: [" + process.argv + "]");
-
-// console.log("length of searchname: " + searchname.length);
 
 for (i=0; i < cmdIn.length; i++) {
-  console.log("loop count: " + i); 
   if (i==0) {
     Verb = searchname[i];
   }
   else {
     Item = searchname[i];
   }
-  console.log("argument: " + searchname[i]);
 }
 
-console.log("command verb: " + Verb);
-console.log("item to act on: " + Item);
-
 executeCommand(Verb,Item);
-console.log("command verb: " + Verb);
-console.log("item to act on: " + Item);
 }
 
 
@@ -113,7 +103,7 @@ function executeCommand(cmd,item) {
         // console.log(chalk.yellow.bold("show the command help"));
         break;
       default:
-        BadArgumentsMsg("ERROR!! unknown command! Please try again!");
+        BadArgumentsMsg("ERROR!! [" + cmd + "] is an  unknown command! Please try again!");
         // console.log(chalk.yellow.bold("Liri only recognizes these commands: " + cmdList));
     }
 }
@@ -158,9 +148,16 @@ function BadArgumentsMsg(msg) {
 
 function SetSpotifyDefaults() {
   // this function sets the default values for when the command is 'spotify-this' and no song argument is supplied
-  console.log(chalk.yellow.bold("SETTING SPOTIFY DEFAULT"));
+  // console.log(chalk.yellow.bold("SETTING SPOTIFY DEFAULT"));
   Verb = "spotify-this-song";
   Item = "The Sign";
+}
+
+function SetMovieDefaults() {
+  console.log(chalk.yellow.bold("SETTING MOVIE DEFAULT"));
+  Verb = "movie-this";
+  Item = "Mr. Nobody";
+
 }
 
 function ReadFromFile() {
@@ -200,7 +197,19 @@ function SearchSpotify(verb,item) {
 
 function SearchBandsInTown(item) {
   //THIS function searches bands in town for the specified item.
-  console.log(chalk.yellow.bold("FUNCTION TO SEARCH BANDS IN TOWN FOR: " + item));
+  console.log(chalk.yellow.bold("FUNCTION TO SEARCH BANDS IN TOWN FOR: [" + item + "]"));
+
+  let query = "https://rest.bandsintown.com/artists/" + item + "/events?app_id=codingbootcamp"
+  axios.get(query).then(
+    function(response, err) {
+      if (err) throw err;
+
+      //SHOW RAW RESPONSE
+      // console.log(response);
+      console.log(response.Venue);
+
+    }
+  )
   
 
 }
@@ -208,5 +217,101 @@ function SearchBandsInTown(item) {
 function SearchOMDB(item) {
   console.log(chalk.yellow.bold("FUNCTION TO SEARCH OMDB FOR: " + item));
 
+  let query = "http://www.omdbapi.com/?t=" + item + "=&plot=short&apikey=trilogy"
 
+  console.log(query);
+
+  axios.get(query).then (
+    function(response, err) {
+      if (err) throw err;
+
+
+      //LOG INFO TO TERMINAL 
+      // console.log("LENGTH OF RATINGS: " + response.data.Ratings.length);
+      // console.log("ROTTEN TOMATOES RATING: " + response.data.Ratings[1].Value);
+      writeToLog(LogFileName, "Selected command: " + Verb + "\n");
+      writeToLog(LogFileName," for movie: " + Item + "\n");
+
+      // console.log(response.data);
+      console.log(chalk.yellow.bold("Title: " + response.data.Title));
+      console.log(chalk.yellow.bold("Year: " + response.data.Year));
+      console.log(chalk.yellow.bold("Rated: " + response.data.Rated));
+      console.log(chalk.yellow.bold("IMDB Rating: " + response.data.imdbRating));
+      console.log(chalk.yellow.bold("Rotten Tomatoes Rating: " + response.data.Ratings[1].Value));
+      // console.log(chalk.yellow.bold("Year: " + response.data.Year));
+      console.log(chalk.yellow.bold("Country: " + response.data.Country));
+      console.log(chalk.yellow.bold("Language: " + response.data.Language));
+      console.log(chalk.yellow.bold("Plot: " + response.data.Plot));
+      console.log(chalk.yellow.bold("Acting Cast: " + response.data.Actors));
+
+      //LOG INFO TO LOG FILE
+      let title= "Title: " + response.data.Title;
+      let year= "Year: " + response.data.Year;
+      let rated= "Rated: " + response.data.Rated;
+      let imdbrating="IMDB Rating: " + response.data.imdbRating;
+      let rottentomatoes="Rotten Tomatos Rating: " + response.data.Ratings[1].Value;
+      let country="Country: " + response.data.Country;
+      let language="Language: " + response.data.Language;
+      let plot="Plot: " + response.data.Plot;
+      let cast="Acting Cast: " + response.data.Actors;
+      // console.log(chalk.red.bold("testing imdbrating before file write: " +imdbrating))
+      writeToLog(LogFileName,title + "\n");
+      writeToLog(LogFileName, year + "\n");
+      writeToLog(LogFileName, rated + "\n");
+      writeToLog(LogFileName, imdbrating + "\n");
+      writeToLog(LogFileName, rottentomatoes + "\n");
+      writeToLog(LogFileName, country + "\n");
+      writeToLog(LogFileName, language + "\n");
+      writeToLog(LogFileName, plot + "\n");
+      writeToLog(LogFileName, cast + "\n");
+
+
+
+    }
+  )
 }
+
+function InitLogFilePath() {
+  //create a log file name. log file name should be the app name and should be stored in the am folder from which Liri is executing
+  // also write a header for this log session.
+  // The header should consist of 2 blank lines, the name of the app (Liri), the date and time of the session start being logged
+
+  //first, get the path to this app:
+  let sPath = process.argv[1] //.split("\\"");
+  // console.log(chalk.yellow.bold("inside InitLogFilePath"));
+  // console.log(chalk.yellow.bold("sPath before mod is: " + sPath));
+  let i = sPath.length-4
+  sPath = sPath.substring(0, i); //get path without app name a the end.
+  // console.log(chalk.yellow.bold("sPath afte substring: " + sPath));
+// sPath = sPath.replace("liri","")
+  
+  let logFileName =sPath + "Liri-Log.txt";
+
+  // console.log("log file name is: " + logFileName);
+
+  //now create the file and start writng out the header info, use append so existing file info is not over-written
+
+let today = moment();
+today = today.format('YYYY-MM-DD-HH-mm');
+
+    // writeToLog(logFileName,"some stuff");
+    writeToLog(logFileName,"\n\n");
+    writeToLog(logFileName,"Liri SESSION STARTED AT: " + today + "\n");
+
+    return logFileName;
+}
+
+function writeToLog(filename, msg) {
+  //this function appends 'msg' to the Liri-Log.txt file.
+  // console.log("the filename is: " + filename);
+  // console.log("the message is: [" + msg + "]");
+
+  fs.appendFile(filename, msg, function(err) {    
+    if (err) {
+      return console.log(err);
+    }
+  
+    // console.log("log entries successfully added to: " + filename);
+    })
+}
+
