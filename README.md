@@ -18,3 +18,7 @@ Added stubbed procedures for all search commands. (next step will be to begin im
 Added code to be able to write a log of the application's actions. Completed OMDB search code, results are displayed in the terminal and logged to a file name 'Liri-log.txt'
 currently working on Bands In Town search.
 
+# Version 0.5
+Code to show Bands in Town search results compled. Next is to implement show results for only events in the US.
+Added code to log when Liri session ended, and to display a message to user showing the path to the Liri-log.txt file.
+

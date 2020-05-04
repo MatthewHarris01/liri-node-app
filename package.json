@@ -24,6 +24,7 @@
     "fs": "0.0.1-security",
     "moment": "^2.25.1",
     "node-spotify-api": "^1.1.1",
+    "readline-sync": "^1.4.10",
     "spotify": "^0.3.0"
   },
   "devDependencies": {}

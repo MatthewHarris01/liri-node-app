@@ -1,10 +1,11 @@
 var fs = require("fs");
 require("dotenv").config();
-chalk = require("chalk");
+var chalk = require("chalk");
 var keys = require("./keys.js");
 var axios = require("axios");
 var moment = require("moment");
 var Spotify = require("spotify");
+var input = require("readline-sync");
 
 
 var Verb =""; // global variable for the command to perform
@@ -197,25 +198,131 @@ function SearchSpotify(verb,item) {
 
 function SearchBandsInTown(item) {
   //THIS function searches bands in town for the specified item.
+  let tmp = item.split("");
+  // console.log(chalk.yellow.bold("item after split: " + tmp));
+  //replace all spaces with "+"; 
+  //this clunky code is used because I could not figure out how to write a regex for " "
+  for (k=0; k < tmp.length; k++) {
+    if (tmp[k] == " ") {
+      tmp[k] = "+";
+    }
+  }
+  let item1 = tmp.join("");
+  // console.log(chalk.yellow.bold("item after replace and join: " + item1));
+
+
+  // item = item.replace(" ","=");
   console.log(chalk.yellow.bold("FUNCTION TO SEARCH BANDS IN TOWN FOR: [" + item + "]"));
 
-  let query = "https://rest.bandsintown.com/artists/" + item + "/events?app_id=codingbootcamp"
+  let query = "https://rest.bandsintown.com/artists/" + item1 + "/events?app_id=codingbootcamp"
+  console.log(chalk.yellow.bold("search query: " + query));
   axios.get(query).then(
     function(response, err) {
       if (err) throw err;
 
-      //SHOW RAW RESPONSE
-      // console.log(response);
-      console.log(response.Venue);
+      //if no results are found (i.e. response.data is an empty array) display a message and end.
+      let responseCount = response.data.length;
+      if (responseCount == 0) {
+        console.log(chalk.red.bold("No 'concert-this' results for: '" + item + "'"));
+        console.log(chalk.red.bold("Liri ends now."));
+        writeToLog(LogFileName,"No 'concert-this' results for: '" + item + "'") //put it in log file that no results were found.
+        LiriEndMessage();
+        return;
+      }
+      //show the count of results and prompt user to show all, or only the first 5
+      console.log(chalk.yellow.bold(responseCount + " results found for '" + item + "'"));
+      let USCount = 0;
+      let countries = [];
+      for (k=0; k<response.data.length; k++) {
+        //this loop counts the number of US responses
+        // responseCount = 0
+        countries.push(response.data[k].venue.country);
+        if (response.data[k].venue.country == "United States") {
+          USCount++
+        }
+      }
+      
+      let action="";
+      showActions = ["Show All " + responseCount + " results at once (Liri will pause after each result, until you hit the 'Enter' key", "Show 5 results at a time", "Show all " + USCount + " results in the United States"]
 
+      index = input.keyInSelect(showActions, chalk.yellow.bold("Choose how you want to display your results from the list above"),{cancel: 'Cancel showing results and end Liri'});
+      do  {
+        if (index == -1) {
+          if (GetYesNo("Are you sure you want to cancel showing the search results and end Liri?")) {
+            console.log(chalk.yellow.bold("Showing 'concert-this' results for '" + item + "' canceled. Liri ends now."));
+            action="No results";
+            writeToLog(LogFileName,"User canceled showing 'concert-this' results for '" + item +"'");
+            LiriEndMessage();
+            return;
+          }
+          else {
+            action = showActions[index]
+          }
+        }
+        if (index == -1) {console.log(chalk.blue.bold("Action is: " + action));}
+      
+          switch (index) {
+            case 0:
+              console.log("show all results");
+              ShowAllBITResults(response.data, item);
+              break;
+           case 1:
+              console.log("show results 5 at a time");
+              break;
+              case 2:
+                console.log("show results in US only");
+                break;
+            }
+          } while (action = "")
+          
+        console.log("answer index is: " + index);
+        console.log(chalk.red.bold("count of countries array: " + countries.length));
+        console.log(chalk.red.bold("Country List: " + countries));
+      
+        action = showActions[index]
     }
   )
   
 
 }
 
+function ShowAllBITResults(data, item) {
+  //this function shows all of the Bands In Town results in a big lump
+  console.log(chalk.yellow.bold("SHOW ALL BIT RESULTS"));
+  
+  let VenueName = "";
+  let VenueLoc = "";
+  let EventDate = "";
+  let totalresponses = data.length;
+
+  for (k = 0; k < data.length; k++) {
+    //assign wanted results to variable
+      VenueName = data[k].venue.name;
+      VenueLoc = data[k].venue.location;
+      EventDate = moment(data[k].datetime).format("MM/DD/YYYY")
+      
+      //write to console and file alternately.
+      console.log(chalk("Response " + (k+1) + " of " + totalresponses + " for '" + item  + "'" ));
+      writeToLog(LogFileName, "\nResponse " + (k+1) + " of " + totalresponses + " for '" + item  + "'\n" )
+
+      console.log(chalk.blue.bold("Venue Name: " + VenueName));
+      writeToLog(LogFileName,"Venue Name: " + VenueName + "\n");
+      // console.log(chalk.blue.bold("Venue Location: " + VenueLoc));
+      writeToLog(LogFileName,"Venue Location: " + VenueLoc + "\n");
+      console.log(chalk.blue.bold("Event Date: " + EventDate));
+      writeToLog(LogFileName,"Event Date: " + EventDate + "\n");
+
+      input.question('Hit Enter key to continue.', {hideEchoBack: true, mask: ''});
+
+      console.log(""); //insert a blank line between listings
+      writeToLog(LogFileName,"\n");
+}
+input.question("Display of results for " + item + " is complete. Hit Enter key to continue (Liri will end).", {hideEchoBack: true, mask: ''});
+LiriEndMessage();
+}
+
 function SearchOMDB(item) {
-  console.log(chalk.yellow.bold("FUNCTION TO SEARCH OMDB FOR: " + item));
+  console.log(chalk.yellow.bold("FUNCTION TO SEARCH OMDB FOR: \"" + item + "\""));
 
   let query = "http://www.omdbapi.com/?t=" + item + "=&plot=short&apikey=trilogy"
 
@@ -314,4 +421,26 @@ function writeToLog(filename, msg) {
     // console.log("log entries successfully added to: " + filename);
     })
 }
+
+function GetYesNo(prompt) {
+  //this function returns true if user chose Yes, false is user hit any key other than "Y"
+  // assumes that input refers to the readline-sync library, and that readline-syn is installed
+
+  if (input.keyInYN(chalk.yellow.bold(prompt + " Press Y for 'Yes' and any other key for 'No'"))) {
+    return true;
+  }
+  else {return false;}
+}
+
+function LiriEndMessage() {
+  //displays where the log file is when Liri ends
+  let endtime = moment().format("MM/DD/YYYY hh:mm");
+  writeToLog(LogFileName, "\nLiri session ended at: " + endtime);
+  console.log(chalk.yellow.bold("Your Liri session has ended"));
+  console.log(chalk.yellow.bold("A log file of this session is in: " + LogFileName));
+}
+
+
+
+
 
