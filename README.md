@@ -25,3 +25,6 @@ Added code to log when Liri session ended, and to display a message to user show
 # Version 0.6
 All code related to the 'concert-this' command is completed, including the optin to show results for events in the US only. Fine-tuned date/time formatting.
 
+# Version 0.7
+Removed some console.log messages used for testing
+

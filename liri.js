@@ -10,11 +10,13 @@ var input = require("readline-sync");
 
 var Verb =""; // global variable for the command to perform
 var Item =""; // global variable for the item to search for
-var LogFileName = InitLogFilePath(); // global variable for the log file path and name.
+var LogFileName = InitLogFile(); // global variable for the log file path and name.
 
-
+//****************************************************************** 
 //THE FOLLOWING STATEMENT PRODUCES A RUNTIME ERROR, "Spotify is not defined."
-// var spotify = new spotify(keys.spotify);  //this line may not work until the keys.js file is populated more fully.
+// var spotify = new Spotify(keys.spotify);  //this line may not work until the keys.js file is populated more fully.
+//****************************************************************** 
+
 
 var cmdList= ["concert-this", "spotify-this-song", "movie-this", "do-what-it-says", "help"];
 
@@ -265,21 +267,21 @@ function SearchBandsInTown(item) {
       
           switch (index) {
             case 0:
-              console.log("show all results");
+              // console.log("show all results");
               ShowAllBITResults(response.data, item, "any country");
               break;
            case 1:
-              console.log("show only results in the United States");
+              // console.log("show only results in the United States");
               ShowAllBITResults(USresult,item, "United States");
               break;
             }
           } while (action = "")
           
-        console.log("answer index is: " + index);
-        console.log(chalk.red.bold("count of Usresults: " + USresult.length));
-        console.log(chalk.red.bold("USresult list" + USresult));
+        // console.log("answer index is: " + index);
+        // console.log(chalk.red.bold("count of Usresults: " + USresult.length));
+        // console.log(chalk.red.bold("USresult list" + USresult));
       
-        action = showActions[index]
+        // action = showActions[index]
     }
   )
   
@@ -288,7 +290,7 @@ function SearchBandsInTown(item) {
 
 function ShowAllBITResults(data, item, country) {
   //this function shows all of the Bands In Town results in a big lump
-  console.log(chalk.yellow.bold("SHOW ALL BIT RESULTS FOR " + country));
+  // console.log(chalk.yellow.bold("SHOW ALL BIT RESULTS FOR " + country));
   writeToLog(LogFileName,"\nResults of 'concert-this' command for '" + item + "' in '" + country + "' \n\n");
   
   let VenueName = "";
@@ -306,7 +308,7 @@ function ShowAllBITResults(data, item, country) {
       
       //write to console and file alternately.
       console.log(chalk("Response " + (k+1) + " of " + totalresponses + " for '" + item  + "' in '" + country + "'" ));
-      console.log(chalk.blue("Country: " + eventCountry));
+      console.log(chalk.blue.bold("Country: " + eventCountry));
       writeToLog(LogFileName, "Response " + (k+1) + " of " + totalresponses + " for '" + item  + "' in '" +  country + "'\n" )
 
       writeToLog(LogFileName, "Country: " + eventCountry + "\n");
@@ -383,7 +385,7 @@ function SearchOMDB(item) {
   )
 }
 
-function InitLogFilePath() {
+function InitLogFile() {
   //create a log file name. log file name should be the app name and should be stored in the am folder from which Liri is executing
   // also write a header for this log session.
   // The header should consist of 2 blank lines, the name of the app (Liri), the date and time of the session start being logged

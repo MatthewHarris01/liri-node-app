@@ -1,0 +1,524 @@
+
+
+Liri SESSION STARTED AT: 2020-05-04 06:15 pm
+
+
+Liri SESSION STARTED AT: 2020-05-04 06:16 pm
+
+Liri session ended at: 05/04/2020 06:16 pmNo 'concert-this' results for: 'Dave Matthews'
+
+Liri SESSION STARTED AT: 2020-05-04 06:16 pm
+No 'concert-this' results for: 'Dave Matthews Band'
+Liri session ended at: 05/04/2020 06:16 pm
+
+Liri SESSION STARTED AT: 2020-05-04 09:17 pm
+
+
+Liri SESSION STARTED AT: 2020-05-04 09:18 pm
+
+
+Liri SESSION STARTED AT: 2020-05-04 09:18 pm
+Selected command: movie-this
+Rated: R
+IMDB Rating: 8.7
+Rotten Tomatos Rating: 87%
+Country: USA
+Language: English
+ for movie: the Matrix
+Title: The Matrix
+Year: 1999
+Plot: A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.
+Acting Cast: Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss, Hugo Weaving
+Liri SESSION STARTED AT: 2020-05-05 09:26 am
+
+
+
+
+Liri SESSION STARTED AT: 2020-05-05 09:27 am
+
+
+Liri SESSION STARTED AT: 2020-05-05 09:28 am
+
+Results of 'concert-this' command for 'Death Cab for Cutie' in 'any country' 
+
+Response 1 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: 
+Venue Name: Streaming LIVE
+Venue Location: 
+Event Date: 05/05/2020 05:00 pm
+
+Response 2 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: Mexico
+Venue Name: Corona Capital Festival
+Venue Location: Guadalajara, Mexico
+Event Date: 05/16/2020 11:00 am
+
+Country: Mexico
+Response 3 of 15 for 'Death Cab for Cutie' in 'any country'
+Venue Name: Teatro Metropolitan
+Venue Location: Mexico City, Mexico
+Event Date: 05/19/2020 07:00 pm
+
+Response 4 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: United States
+Venue Name: ACL Live at The Moody Theater
+Venue Location: Austin, TX
+Event Date: 05/21/2020 06:00 pm
+
+Response 5 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: United States
+Venue Name: ACL Live at The Moody Theater
+Venue Location: Austin, TX
+Event Date: 05/22/2020 06:00 pm
+
+Response 6 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ August Hall
+Venue Location: San Francisco, CA
+Event Date: 05/28/2020 07:00 pm
+
+Country: United States
+Response 7 of 15 for 'Death Cab for Cutie' in 'any country'
+Venue Name: Hangout on the Hudson
+Venue Location: Wappingers Falls, NY
+Event Date: 08/01/2020 11:00 am
+
+Country: United States
+Response 8 of 15 for 'Death Cab for Cutie' in 'any country'
+Venue Name: Out of Space at Canal Shores
+Venue Location: Evanston, IL
+Event Date: 08/07/2020 07:00 pm
+
+Response 9 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: Usa
+Venue Name: Ben Gibbard Solo Show @ Carnegie Lecture Hall
+Venue Location: Pittsburgh, PA
+Event Date: 10/02/2020 07:00 pm
+
+Response 10 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Jefferson Theater
+Venue Location: Charlottesville, VA
+Event Date: 10/03/2020 07:00 pm
+
+Response 11 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Bijou Theatre
+Venue Location: Knoxville, TN
+Event Date: 10/04/2020 07:00 pm
+
+Response 12 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Stuart's Opera House
+Venue Location: Nelsonville, OH
+Event Date: 10/05/2020 07:00 pm
+
+Response 13 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Carolina Theatre
+Venue Location: Durham, NC
+Event Date: 10/07/2020 07:00 pm
+
+Response 14 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Georgia Theatre
+Venue Location: Athens, GA
+Event Date: 10/08/2020 07:00 pm
+
+Country: United States
+Response 15 of 15 for 'Death Cab for Cutie' in 'any country'
+Venue Name: Ben Gibbard Solo Show @ Charleston Music Hall
+Venue Location: Charleston, SC
+Event Date: 10/09/2020 07:00 pm
+
+
+Liri session ended at: 05/05/2020 09:28 amLiri SESSION STARTED AT: 2020-05-05 09:28 am
+
+
+
+Results of 'concert-this' command for 'Death Cab for Cutie' in 'United States' 
+
+Response 1 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: ACL Live at The Moody Theater
+Venue Location: Austin, TX
+Event Date: 05/21/2020 06:00 pm
+
+Country: United States
+Response 2 of 11 for 'Death Cab for Cutie' in 'United States'
+Venue Name: ACL Live at The Moody Theater
+Venue Location: Austin, TX
+Event Date: 05/22/2020 06:00 pm
+
+Response 3 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ August Hall
+Venue Location: San Francisco, CA
+Event Date: 05/28/2020 07:00 pm
+
+Response 4 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Hangout on the Hudson
+Venue Location: Wappingers Falls, NY
+Event Date: 08/01/2020 11:00 am
+
+Response 5 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Out of Space at Canal Shores
+Venue Location: Evanston, IL
+Event Date: 08/07/2020 07:00 pm
+
+Response 6 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Jefferson Theater
+Venue Location: Charlottesville, VA
+Event Date: 10/03/2020 07:00 pm
+
+Response 7 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Bijou Theatre
+Venue Location: Knoxville, TN
+Event Date: 10/04/2020 07:00 pm
+
+Response 8 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Stuart's Opera House
+Venue Location: Nelsonville, OH
+Event Date: 10/05/2020 07:00 pm
+
+Country: United States
+Response 9 of 11 for 'Death Cab for Cutie' in 'United States'
+Venue Name: Ben Gibbard Solo Show @ Carolina Theatre
+Venue Location: Durham, NC
+Event Date: 10/07/2020 07:00 pm
+
+Response 10 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Georgia Theatre
+Venue Location: Athens, GA
+Event Date: 10/08/2020 07:00 pm
+
+Response 11 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Charleston Music Hall
+Venue Location: Charleston, SC
+Event Date: 10/09/2020 07:00 pm
+
+
+Liri session ended at: 05/05/2020 09:29 am
+
+Liri SESSION STARTED AT: 2020-05-05 09:33 am
+
+Results of 'concert-this' command for 'Death Cab for Cutie' in 'United States' 
+
+Country: United States
+Response 1 of 11 for 'Death Cab for Cutie' in 'United States'
+Venue Name: ACL Live at The Moody Theater
+Venue Location: Austin, TX
+Event Date: 05/21/2020 06:00 pm
+
+Response 2 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: ACL Live at The Moody Theater
+Venue Location: Austin, TX
+Event Date: 05/22/2020 06:00 pm
+
+Response 3 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ August Hall
+Venue Location: San Francisco, CA
+Event Date: 05/28/2020 07:00 pm
+
+Response 4 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Hangout on the Hudson
+Venue Location: Wappingers Falls, NY
+Event Date: 08/01/2020 11:00 am
+
+Response 5 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Out of Space at Canal Shores
+Venue Location: Evanston, IL
+Event Date: 08/07/2020 07:00 pm
+
+Response 6 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Jefferson Theater
+Venue Location: Charlottesville, VA
+Event Date: 10/03/2020 07:00 pm
+
+Response 7 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Bijou Theatre
+Venue Location: Knoxville, TN
+Event Date: 10/04/2020 07:00 pm
+
+Response 8 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Stuart's Opera House
+Venue Location: Nelsonville, OH
+Event Date: 10/05/2020 07:00 pm
+
+Response 9 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Carolina Theatre
+Venue Location: Durham, NC
+Event Date: 10/07/2020 07:00 pm
+
+Response 10 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Georgia Theatre
+Venue Location: Athens, GA
+Event Date: 10/08/2020 07:00 pm
+
+Country: United States
+Response 11 of 11 for 'Death Cab for Cutie' in 'United States'
+Venue Name: Ben Gibbard Solo Show @ Charleston Music Hall
+Venue Location: Charleston, SC
+Event Date: 10/09/2020 07:00 pm
+
+
+Liri session ended at: 05/05/2020 09:33 am
+
+Liri SESSION STARTED AT: 2020-05-05 09:35 am
+
+Results of 'concert-this' command for 'Death Cab for Cutie' in 'United States' 
+
+Country: United States
+Response 1 of 11 for 'Death Cab for Cutie' in 'United States'
+Venue Name: ACL Live at The Moody Theater
+Venue Location: Austin, TX
+Event Date: 05/21/2020 06:00 pm
+
+Response 2 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: ACL Live at The Moody Theater
+Venue Location: Austin, TX
+Event Date: 05/22/2020 06:00 pm
+
+Response 3 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ August Hall
+Venue Location: San Francisco, CA
+Event Date: 05/28/2020 07:00 pm
+
+Response 4 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Hangout on the Hudson
+Venue Location: Wappingers Falls, NY
+Event Date: 08/01/2020 11:00 am
+
+Response 5 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Out of Space at Canal Shores
+Venue Location: Evanston, IL
+Event Date: 08/07/2020 07:00 pm
+
+Country: United States
+Response 6 of 11 for 'Death Cab for Cutie' in 'United States'
+Venue Name: Ben Gibbard Solo Show @ Jefferson Theater
+Venue Location: Charlottesville, VA
+Event Date: 10/03/2020 07:00 pm
+
+Response 7 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Bijou Theatre
+Venue Location: Knoxville, TN
+Event Date: 10/04/2020 07:00 pm
+
+Response 8 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Stuart's Opera House
+Venue Location: Nelsonville, OH
+Event Date: 10/05/2020 07:00 pm
+
+Response 9 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Carolina Theatre
+Venue Location: Durham, NC
+Event Date: 10/07/2020 07:00 pm
+
+Response 10 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Georgia Theatre
+Venue Location: Athens, GA
+Event Date: 10/08/2020 07:00 pm
+
+Response 11 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Charleston Music Hall
+Venue Location: Charleston, SC
+Event Date: 10/09/2020 07:00 pm
+
+
+Liri session ended at: 05/05/2020 09:36 am
+
+Liri SESSION STARTED AT: 2020-05-05 09:37 am
+
+Results of 'concert-this' command for 'Death Cab for Cutie' in 'United States' 
+
+Response 1 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: ACL Live at The Moody Theater
+Venue Location: Austin, TX
+Event Date: 05/21/2020 06:00 pm
+
+Country: United States
+Response 2 of 11 for 'Death Cab for Cutie' in 'United States'
+Venue Name: ACL Live at The Moody Theater
+Venue Location: Austin, TX
+Event Date: 05/22/2020 06:00 pm
+
+Response 3 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ August Hall
+Venue Location: San Francisco, CA
+Event Date: 05/28/2020 07:00 pm
+
+Response 4 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Hangout on the Hudson
+Venue Location: Wappingers Falls, NY
+Event Date: 08/01/2020 11:00 am
+
+Response 5 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Out of Space at Canal Shores
+Venue Location: Evanston, IL
+Event Date: 08/07/2020 07:00 pm
+
+Country: United States
+Response 6 of 11 for 'Death Cab for Cutie' in 'United States'
+Venue Name: Ben Gibbard Solo Show @ Jefferson Theater
+Venue Location: Charlottesville, VA
+Event Date: 10/03/2020 07:00 pm
+
+Response 7 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Bijou Theatre
+Venue Location: Knoxville, TN
+Event Date: 10/04/2020 07:00 pm
+
+Response 8 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Stuart's Opera House
+Venue Location: Nelsonville, OH
+Event Date: 10/05/2020 07:00 pm
+
+Response 9 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Carolina Theatre
+Venue Location: Durham, NC
+Event Date: 10/07/2020 07:00 pm
+
+Response 10 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Georgia Theatre
+Venue Location: Athens, GA
+Event Date: 10/08/2020 07:00 pm
+
+Response 11 of 11 for 'Death Cab for Cutie' in 'United States'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Charleston Music Hall
+Venue Location: Charleston, SC
+Event Date: 10/09/2020 07:00 pm
+
+
+Liri session ended at: 05/05/2020 09:37 am
+
+Liri SESSION STARTED AT: 2020-05-05 09:37 am
+
+Results of 'concert-this' command for 'Death Cab for Cutie' in 'any country' 
+
+Response 1 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: 
+Venue Name: Streaming LIVE
+Venue Location: 
+Event Date: 05/05/2020 05:00 pm
+
+Response 2 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: Mexico
+Venue Name: Corona Capital Festival
+Venue Location: Guadalajara, Mexico
+Event Date: 05/16/2020 11:00 am
+
+Response 3 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: Mexico
+Venue Name: Teatro Metropolitan
+Venue Location: Mexico City, Mexico
+Event Date: 05/19/2020 07:00 pm
+
+Response 4 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: United States
+Venue Name: ACL Live at The Moody Theater
+Venue Location: Austin, TX
+Event Date: 05/21/2020 06:00 pm
+
+Response 5 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: United States
+Venue Name: ACL Live at The Moody Theater
+Venue Location: Austin, TX
+Event Date: 05/22/2020 06:00 pm
+
+Response 6 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ August Hall
+Venue Location: San Francisco, CA
+Event Date: 05/28/2020 07:00 pm
+
+Response 7 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: United States
+Venue Name: Hangout on the Hudson
+Venue Location: Wappingers Falls, NY
+Event Date: 08/01/2020 11:00 am
+
+Response 8 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: United States
+Venue Name: Out of Space at Canal Shores
+Venue Location: Evanston, IL
+Event Date: 08/07/2020 07:00 pm
+
+Response 9 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: Usa
+Venue Name: Ben Gibbard Solo Show @ Carnegie Lecture Hall
+Venue Location: Pittsburgh, PA
+Event Date: 10/02/2020 07:00 pm
+
+Response 10 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Jefferson Theater
+Venue Location: Charlottesville, VA
+Event Date: 10/03/2020 07:00 pm
+
+Response 11 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Bijou Theatre
+Venue Location: Knoxville, TN
+Event Date: 10/04/2020 07:00 pm
+
+Response 12 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Stuart's Opera House
+Venue Location: Nelsonville, OH
+Event Date: 10/05/2020 07:00 pm
+
+Response 13 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Carolina Theatre
+Venue Location: Durham, NC
+Event Date: 10/07/2020 07:00 pm
+
+Response 14 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Georgia Theatre
+Venue Location: Athens, GA
+Event Date: 10/08/2020 07:00 pm
+
+Response 15 of 15 for 'Death Cab for Cutie' in 'any country'
+Country: United States
+Venue Name: Ben Gibbard Solo Show @ Charleston Music Hall
+Venue Location: Charleston, SC
+Event Date: 10/09/2020 07:00 pm
+
+
+Liri session ended at: 05/05/2020 09:38 am
