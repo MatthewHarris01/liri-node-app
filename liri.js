@@ -232,18 +232,20 @@ function SearchBandsInTown(item) {
       //show the count of results and prompt user to show all, or only the first 5
       console.log(chalk.yellow.bold(responseCount + " results found for '" + item + "'"));
       let USCount = 0;
-      let countries = [];
+      let USresult = [];
       for (k=0; k<response.data.length; k++) {
         //this loop counts the number of US responses
         // responseCount = 0
-        countries.push(response.data[k].venue.country);
+        // USresult.push(response.data[k].venue.country); //thi line is not needed
         if (response.data[k].venue.country == "United States") {
+          //increase the count of US events, and copy the result into  the USresult array.
+          USresult.push(response.data[k]);
           USCount++
         }
       }
       
       let action="";
-      showActions = ["Show All " + responseCount + " results at once (Liri will pause after each result, until you hit the 'Enter' key", "Show 5 results at a time", "Show all " + USCount + " results in the United States"]
+      showActions = ["Show All " + responseCount + " results at once (Liri will pause after each result, until you hit the 'Enter' key", "Show all " + USCount + " results in the United States"]
 
       index = input.keyInSelect(showActions, chalk.yellow.bold("Choose how you want to display your results from the list above"),{cancel: 'Cancel showing results and end Liri'});
       do  {
@@ -264,20 +266,18 @@ function SearchBandsInTown(item) {
           switch (index) {
             case 0:
               console.log("show all results");
-              ShowAllBITResults(response.data, item);
+              ShowAllBITResults(response.data, item, "any country");
               break;
            case 1:
-              console.log("show results 5 at a time");
+              console.log("show only results in the United States");
+              ShowAllBITResults(USresult,item, "United States");
               break;
-              case 2:
-                console.log("show results in US only");
-                break;
             }
           } while (action = "")
           
         console.log("answer index is: " + index);
-        console.log(chalk.red.bold("count of countries array: " + countries.length));
-        console.log(chalk.red.bold("Country List: " + countries));
+        console.log(chalk.red.bold("count of Usresults: " + USresult.length));
+        console.log(chalk.red.bold("USresult list" + USresult));
       
         action = showActions[index]
     }
@@ -286,28 +286,33 @@ function SearchBandsInTown(item) {
 
 }
 
-function ShowAllBITResults(data, item) {
+function ShowAllBITResults(data, item, country) {
   //this function shows all of the Bands In Town results in a big lump
-  console.log(chalk.yellow.bold("SHOW ALL BIT RESULTS"));
+  console.log(chalk.yellow.bold("SHOW ALL BIT RESULTS FOR " + country));
+  writeToLog(LogFileName,"\nResults of 'concert-this' command for '" + item + "' in '" + country + "' \n\n");
   
   let VenueName = "";
   let VenueLoc = "";
   let EventDate = "";
+  let eventCountry = "";
   let totalresponses = data.length;
 
   for (k = 0; k < data.length; k++) {
     //assign wanted results to variable
       VenueName = data[k].venue.name;
       VenueLoc = data[k].venue.location;
-      EventDate = moment(data[k].datetime).format("MM/DD/YYYY")
+      EventDate = moment(data[k].datetime).format("MM/DD/YYYY hh:mm a")
+      eventCountry = data[k].venue.country;
       
       //write to console and file alternately.
-      console.log(chalk("Response " + (k+1) + " of " + totalresponses + " for '" + item  + "'" ));
-      writeToLog(LogFileName, "\nResponse " + (k+1) + " of " + totalresponses + " for '" + item  + "'\n" )
+      console.log(chalk("Response " + (k+1) + " of " + totalresponses + " for '" + item  + "' in '" + country + "'" ));
+      console.log(chalk.blue("Country: " + eventCountry));
+      writeToLog(LogFileName, "Response " + (k+1) + " of " + totalresponses + " for '" + item  + "' in '" +  country + "'\n" )
 
+      writeToLog(LogFileName, "Country: " + eventCountry + "\n");
       console.log(chalk.blue.bold("Venue Name: " + VenueName));
       writeToLog(LogFileName,"Venue Name: " + VenueName + "\n");
-      // console.log(chalk.blue.bold("Venue Location: " + VenueLoc));
+      console.log(chalk.blue.bold("Venue Location: " + VenueLoc));
       writeToLog(LogFileName,"Venue Location: " + VenueLoc + "\n");
       console.log(chalk.blue.bold("Event Date: " + EventDate));
       writeToLog(LogFileName,"Event Date: " + EventDate + "\n");
@@ -317,7 +322,7 @@ function ShowAllBITResults(data, item) {
       console.log(""); //insert a blank line between listings
       writeToLog(LogFileName,"\n");
 }
-input.question("Display of results for " + item + " is complete. Hit Enter key to continue (Liri will end).", {hideEchoBack: true, mask: ''});
+input.question(chalk.yellow.bold("Display of 'concert-this' results for " + item + " in '" + country + "' is complete. Hit Enter key to continue (Liri will end)."), {hideEchoBack: true, mask: ''});
 LiriEndMessage();
 }
 
@@ -399,7 +404,7 @@ function InitLogFilePath() {
   //now create the file and start writng out the header info, use append so existing file info is not over-written
 
 let today = moment();
-today = today.format('YYYY-MM-DD-HH-mm');
+today = today.format('YYYY-MM-DD hh:mm a');
 
     // writeToLog(logFileName,"some stuff");
     writeToLog(logFileName,"\n\n");
@@ -434,7 +439,7 @@ function GetYesNo(prompt) {
 
 function LiriEndMessage() {
   //displays where the log file is when Liri ends
-  let endtime = moment().format("MM/DD/YYYY hh:mm");
+  let endtime = moment().format("MM/DD/YYYY hh:mm a");
   writeToLog(LogFileName, "\nLiri session ended at: " + endtime);
   console.log(chalk.yellow.bold("Your Liri session has ended"));
   console.log(chalk.yellow.bold("A log file of this session is in: " + LogFileName));

@@ -22,3 +22,6 @@ currently working on Bands In Town search.
 Code to show Bands in Town search results compled. Next is to implement show results for only events in the US.
 Added code to log when Liri session ended, and to display a message to user showing the path to the Liri-log.txt file.
 
+# Version 0.6
+All code related to the 'concert-this' command is completed, including the optin to show results for events in the US only. Fine-tuned date/time formatting.
+
