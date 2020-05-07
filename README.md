@@ -28,3 +28,6 @@ All code related to the 'concert-this' command is completed, including the optin
 # Version 0.7
 Removed some console.log messages used for testing
 
+# Version 0.8
+Added code to handle 404 errors for the concert-this search, since it is easy to make a spelling mistake in a band or artist's name.
+

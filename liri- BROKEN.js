@@ -4,7 +4,8 @@ var chalk = require("chalk");
 var keys = require("./keys.js");
 var axios = require("axios");
 var moment = require("moment");
-var Spotify = require("spotify");
+// var Spotify = require("spotify");
+var Spotify = require('node-spotify-api');
 var input = require("readline-sync");
 
 
@@ -196,6 +197,48 @@ function SearchSpotify(verb,item) {
   // this function searches spotify for the specified item.
   console.log(chalk.yellow.bold("FUNCTION TO SEARCH SPOTIFY FOR: " + Item));
 
+  //capture and display these:
+  //Artis(s), Song name,, link to the song from Spotify, The album the song is from
+
+
+  //create a new Spotify search object
+  spotify = new Spotify({
+    id: "527242d5f2844979aed548396a2593fc",
+    secret: "2c710fca4c8d4531a24384a347378330"
+  })
+
+  let tmp = item.split("");
+  // console.log(chalk.yellow.bold("item after split: " + tmp));
+  //replace all spaces with "+"; 
+  //this clunky code is used because I could not figure out how to write a regex for " "
+  for (k=0; k < tmp.length; k++) {
+    if (tmp[k] == " ") {
+      tmp[k] = "+";
+    }
+  }
+  let item1 =  tmp.join("");
+  
+
+  //make the search for track
+  spotify.search({ type: 'track', query: "\"" + item1 +  "\"" }, function(err, data) {
+    if (err) {
+      return console.log("Spotify error ocurred: " + err);
+    }
+
+    console.log(chalk.yellow.bold("Count of results: " + data.tracks.items.length));
+
+    console.log(chalk.yellow.bold("Output from Spotify search: "));
+    for (let k=0; k<data.tracks.items.length; k++) {
+      console.log(data.tracks.items[k].artists);
+
+      input.question('Hit Enter key to continue.', {hideEchoBack: true, mask: ''});
+
+    }
+    console.log(chalk.yellow.bold("end of artist output."));
+    // console.log(JSON.stringify(data.tracks.items[2], undefined, 2));
+    // console.log(data);
+  
+  })
 }
 
 function SearchBandsInTown(item) {
@@ -219,9 +262,14 @@ function SearchBandsInTown(item) {
   let query = "https://rest.bandsintown.com/artists/" + item1 + "/events?app_id=codingbootcamp"
   console.log(chalk.yellow.bold("search query: " + query));
   axios.get(query).then(
-    function(response, err) {
-      if (err) throw err;
-
+    function(response,) {
+      console.log(chalk.yellow.bold("FIRST LINE OF .THEN FUNCTION"));
+      if (err) { 
+        throw err;
+        console.log(chalk.red.bold("THERE HAS BEEN AN ERROR"));
+        console.log(chalk.red.bold("Error is: " + err));
+      }
+console.log(chalk.yellow.bold("WE GOT PAST THE ERROR"));
       //if no results are found (i.e. response.data is an empty array) display a message and end.
       let responseCount = response.data.length;
       if (responseCount == 0) {
@@ -235,6 +283,7 @@ function SearchBandsInTown(item) {
       console.log(chalk.yellow.bold(responseCount + " results found for '" + item + "'"));
       let USCount = 0;
       let USresult = [];
+      console.log(chalk.yellow.bold("next few lines replace spaces with '+'"));
       for (k=0; k<response.data.length; k++) {
         //this loop counts the number of US responses
         // responseCount = 0
@@ -245,7 +294,10 @@ function SearchBandsInTown(item) {
           USCount++
         }
       }
+
+      console.log("modified item: " + item1);
       
+      console.log("show menu next");
       let action="";
       showActions = ["Show All " + responseCount + " results at once (Liri will pause after each result, until you hit the 'Enter' key", "Show all " + USCount + " results in the United States"]
 
@@ -284,23 +336,22 @@ function SearchBandsInTown(item) {
         // action = showActions[index]
     }
   )
-  .catch( function(err) {
-    // console.log(chalk.red.bold("THIS IS THE CATCH FUNCTION FOR " + item1));
-    writeToLog(LogFileName,"The 'concert-this' command searching for '" + item + "' failed with an error!!");
-    console.log(chalk.red.bold("concert-this search error: "));
-    console.log(chalk.red.bold(err.message));
-    writeToLog(LogFileName,"\n" + err.message);
-    let strx = err.message;
-    let n = strx.search("404");
+  // .catch( function(err) {
+  //   console.log(chalk.red.bold("THIS IS THE CATCH FUNCTION FOR " + item1));
+  //   console.log(chalk.red.bold("concert-this search error: " + err));
+  //   let strx = err.message;
+  //   // strx = JSON.stringify(err);
+  //   console.log(typeof strx);
+  //   let n = strx.search("404");
+  //   console.log(chalk.blue.bold("Error message is: " + strx));
 
-    if (n != -1) {
-    console.log(chalk.red.bold("\nThe 404 error may mean that the name of the band or artist was not have spelled correctly. correctly. Please try again! liri will end now."));
-    writeToLog(LogFileName,"\nThe 404 error may mean that the name of the band or artist was not spelled correctly.\n" );
-    LiriEndMessage();
-    }
+  //   if (n != -1) {
+  //   console.log(chalk.red.bold("The 404 error usually means you have not spelled the name of the band correctly. Please try again! liri will end now."));
+  //   }
 
 
-  })
+  // })
+    
   
 
 }
@@ -395,6 +446,9 @@ function SearchOMDB(item) {
       writeToLog(LogFileName, language + "\n");
       writeToLog(LogFileName, plot + "\n");
       writeToLog(LogFileName, cast + "\n");
+
+
+
     }
   )
 }
@@ -460,6 +514,7 @@ function LiriEndMessage() {
   console.log(chalk.yellow.bold("Your Liri session has ended"));
   console.log(chalk.yellow.bold("A log file of this session is in: " + LogFileName));
 }
+
 
 
 
