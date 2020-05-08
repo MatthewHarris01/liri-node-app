@@ -3,19 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bands in town search</title>
+  <title>OMDB Search</title>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>  
 </head>
 <body>
   
 </body>
 <script>
-  SearchBandsInTown("Celine+Dion");
+  SearchBandsInTown("The Matrix");
+var item = "The Matrix";
 function SearchBandsInTown(item) {
   //THIS function searches bands in town for the specified item.
   console.log("FUNCTION TO SEARCH BANDS IN TOWN FOR: [" + item + "]");
 
-  let query = "https://rest.bandsintown.com/artists/" + item + "/events?app_id=codingbootcamp"
+
+  let query = "http://www.omdbapi.com/?t=" + item + "=&plot=short&apikey=trilogy"
+
+  console.log("Query: " + query);
+  // let query = "https://rest.bandsintown.com/artists/" + item + "/events?app_id=codingbootcamp"
   axios.get(query).then(
     function(response, err) {
       if (err) throw err;

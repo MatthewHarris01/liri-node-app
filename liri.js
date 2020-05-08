@@ -4,7 +4,8 @@ var chalk = require("chalk");
 var keys = require("./keys.js");
 var axios = require("axios");
 var moment = require("moment");
-var Spotify = require("spotify");
+var Spotify = require('node-spotify-api');
+// var Spotify = require("spotify");
 var input = require("readline-sync");
 
 
@@ -34,7 +35,7 @@ if (cmdIn.length == 1){
   //do we need to set the default for 'spotify-this'?
   if (s == "spotify-this-song") {
     //yes, set default values
-    console.log(chalk.yellow.bold("NEED TO SET SPOTIFY DEFAULT"));
+    // console.log(chalk.yellow.bold("NEED TO SET SPOTIFY DEFAULT"));
     SetSpotifyDefaults();
   } else if (s == "movie-this") {
     //set hard-coded default for movie-this
@@ -56,8 +57,8 @@ if (cmdIn.length > 2) {
 
  //if we get here, the arguments are not too many or too few.
  ParseArguments(); //call function to parse out command and search item.
- console.log(chalk.yellow.bold("Verb is: " + Verb));
- console.log(chalk.yellow.bold("Item is: " + Item))
+//  console.log(chalk.yellow.bold("Verb is: " + Verb));
+//  console.log(chalk.yellow.bold("Item is: " + Item))
 
 // console.log("count of process args: " + process.argv.length);
 function ParseArguments() {
@@ -85,15 +86,15 @@ function executeCommand(cmd,item) {
   cmd = cmd.toLowerCase(); //ensure the command parsing is not case-sensitive.
     switch (cmd) {
       case "concert-this":
-        console.log(chalk.yellow.bold("search bands in town for: " + item));
+        // console.log(chalk.yellow.bold("search bands in town for: " + item));
         SearchBandsInTown(item);
         break;
       case "spotify-this-song":
-        console.log(chalk.yellow.bold("search spotify for: " + item));
+        // console.log(chalk.yellow.bold("search spotify for: " + item));
         SearchSpotify(item);
         break;
       case "movie-this":
-        console.log(chalk.yellow.bold("search omdb for: " + item));
+        // console.log(chalk.yellow.bold("search omdb for: " + item));
         SearchOMDB(item);
         break;
       case "do-what-it-says":
@@ -113,9 +114,9 @@ function executeCommand(cmd,item) {
 
 function UserHelp() {
   //this function display help to the user.
-  console.log(chalk.red.bold("**LIRI HELP**"));
-  console.log("");
-  console.log(chalk.blue.bold("Liri recognizes the following 5 commands:"));
+  // console.log(chalk.red.bold("**LIRI HELP**"));
+  // console.log("");
+  // console.log(chalk.blue.bold("Liri recognizes the following 5 commands:"));
   for (let i =0; i < cmdList.length; i++) {
     console.log(chalk.blue.bold("     " + cmdList[i]));
   }
@@ -157,7 +158,7 @@ function SetSpotifyDefaults() {
 }
 
 function SetMovieDefaults() {
-  console.log(chalk.yellow.bold("SETTING MOVIE DEFAULT"));
+  // console.log(chalk.yellow.bold("SETTING MOVIE DEFAULT"));
   Verb = "movie-this";
   Item = "Mr. Nobody";
 
@@ -165,19 +166,19 @@ function SetMovieDefaults() {
 
 function ReadFromFile() {
   let inputArray = [];
-  console.log(chalk.yellow.bold("READ THE TEXT FILE TO GET COMMAND AND ITEM"));
+  // console.log(chalk.yellow.bold("READ THE TEXT FILE TO GET COMMAND AND ITEM"));
 
 FS.readFile("random.txt", "utf8", function(error,data) {
   if (error) {
     return console.log(error);
   }
-  console.log(chalk.blue.bold("[" + data + "]"));
+  // console.log(chalk.blue.bold("[" + data + "]"));
   data = data.replace(/\n/g,"");  //get rid of LF char
   data = data.replace(/\r/g,"");  //get rid of CR
 
 
   inputArray = data.split(",");
-  console.log(chalk.yellow.bold("length of input array: " + inputArray.length));
+  // console.log(chalk.yellow.bold("length of input array: " + inputArray.length));
 
   //assume that the input array has 2 elements and element 0 is the verb, and element 1 is the item.
   Verb = inputArray[0];
@@ -186,22 +187,78 @@ FS.readFile("random.txt", "utf8", function(error,data) {
   // Item = s;
   // Item=Item.replace(/\r/g,"");
 
-  console.log(chalk.blue.bold("Verb is: [" + Verb + "]"));
-  console.log(chalk.blue.bold("item is: [" + Item + "]"));
+  // console.log(chalk.blue.bold("Verb is: [" + Verb + "]"));
+  // console.log(chalk.blue.bold("item is: [" + Item + "]"));
 })
 
 }
 
 function SearchSpotify(verb,item) {
   // this function searches spotify for the specified item.
-  console.log(chalk.yellow.bold("FUNCTION TO SEARCH SPOTIFY FOR: " + Item));
+  // console.log(chalk.yellow.bold("FUNCTION TO SEARCH SPOTIFY FOR: " + Item));
+  // this function searches spotify for the specified item.
+  // console.log(chalk.yellow.bold("FUNCTION TO SEARCH SPOTIFY FOR: " + Item));
 
+  //capture and display these:
+  //Artist(s), Song name,, link to the song from Spotify, The album the song is from
+
+
+  //create a new Spotify search object
+  // let spotify = new Spotify({
+
+    var spotify = new Spotify({    
+    id: "527242d5f2844979aed548396a2593fc",
+    secret: "2c710fca4c8d4531a24384a347378330"
+  })
+
+  // let tmp = item.split("");
+  //replace all spaces with "+"; 
+  //this clunky code is used because I could not figure out how to write a regex for " "
+  // for (k=0; k < tmp.length; k++) {
+    // if (tmp[k] == " ") {
+      // tmp[k] = "+";
+    // }
+  // }
+  // let item1 =  tmp.join("");
+  
+
+  //make the search for track
+  spotify.search({ type: 'track', query: "\"" + item +  "\"" }, function(err, data) {
+    if (err) {
+      return console.log("Spotify search error ocurred: " + err);
+    }
+
+    console.log(chalk.yellow.bold("Count of results: " + data.tracks.items.length));
+
+    // console.log(data);
+    // return;
+
+    console.log(chalk.yellow.bold("Output from Spotify search: "));
+    for (let k=0; k<data.tracks.items.length; k++) {
+
+      //Artist(s), Song name,, link to the song from Spotify, The album the song is from
+      if (data.tracks.items[k].type == 'artist') {
+        let ArtistName = data.tracks.items[k].name
+      }
+      // let ArtristName = data.tracks.items[k].name;
+      let SongName = item //as entered by user
+      console.log(data.tracks.items[k].artists);
+
+      input.question('Hit Enter key to continue.', {hideEchoBack: true, mask: ''});
+
+    }
+    console.log(chalk.yellow.bold("end of artist output."));
+    // console.log(JSON.stringify(data.tracks.items[2], undefined, 2));
+    // console.log(data);
+  
+  })
 }
+
+
 
 function SearchBandsInTown(item) {
   //THIS function searches bands in town for the specified item.
   let tmp = item.split("");
-  // console.log(chalk.yellow.bold("item after split: " + tmp));
   //replace all spaces with "+"; 
   //this clunky code is used because I could not figure out how to write a regex for " "
   for (k=0; k < tmp.length; k++) {
@@ -214,10 +271,10 @@ function SearchBandsInTown(item) {
 
 
   // item = item.replace(" ","=");
-  console.log(chalk.yellow.bold("FUNCTION TO SEARCH BANDS IN TOWN FOR: [" + item + "]"));
+  // console.log(chalk.yellow.bold("FUNCTION TO SEARCH BANDS IN TOWN FOR: [" + item + "]"));
 
   let query = "https://rest.bandsintown.com/artists/" + item1 + "/events?app_id=codingbootcamp"
-  console.log(chalk.yellow.bold("search query: " + query));
+  // console.log(chalk.yellow.bold("search query: " + query));
   axios.get(query).then(
     function(response, err) {
       if (err) throw err;
@@ -294,7 +351,7 @@ function SearchBandsInTown(item) {
     let n = strx.search("404");
 
     if (n != -1) {
-    console.log(chalk.red.bold("\nThe 404 error may mean that the name of the band or artist was not have spelled correctly. correctly. Please try again! liri will end now."));
+    console.log(chalk.red.bold("\nThe 404 error may mean that the name of the band or artist was not spelled correctly. correctly. Please try again! liri will end now."));
     writeToLog(LogFileName,"\nThe 404 error may mean that the name of the band or artist was not spelled correctly.\n" );
     LiriEndMessage();
     }
@@ -346,11 +403,11 @@ LiriEndMessage();
 }
 
 function SearchOMDB(item) {
-  console.log(chalk.yellow.bold("FUNCTION TO SEARCH OMDB FOR: \"" + item + "\""));
+  // console.log(chalk.yellow.bold("FUNCTION TO SEARCH OMDB FOR: \"" + item + "\""));
 
   let query = "http://www.omdbapi.com/?t=" + item + "=&plot=short&apikey=trilogy"
 
-  console.log(query);
+  // console.log(query);
 
   axios.get(query).then (
     function(response, err) {
@@ -360,15 +417,22 @@ function SearchOMDB(item) {
       //LOG INFO TO TERMINAL 
       // console.log("LENGTH OF RATINGS: " + response.data.Ratings.length);
       // console.log("ROTTEN TOMATOES RATING: " + response.data.Ratings[1].Value);
-      writeToLog(LogFileName, "Selected command: " + Verb + "\n");
-      writeToLog(LogFileName," for movie: " + Item + "\n");
+      writeToLog(LogFileName, "\nSelected command: '" + Verb + "' for movie '" + item + "'.\n");
+      // writeToLog(LogFileName," for movie: " + Item + "\n");
 
       // console.log(response.data);
       console.log(chalk.yellow.bold("Title: " + response.data.Title));
       console.log(chalk.yellow.bold("Year: " + response.data.Year));
       console.log(chalk.yellow.bold("Rated: " + response.data.Rated));
       console.log(chalk.yellow.bold("IMDB Rating: " + response.data.imdbRating));
-      console.log(chalk.yellow.bold("Rotten Tomatoes Rating: " + response.data.Ratings[1].Value));
+// console.log(chalk.blue.bold("type of response.data.Ratings[1].Value: " + typeof response.data.Ratings[1]))      ;
+      if (response.data.Ratings[1] == undefined) {
+        console.log(chalk.yellow.bold("Rotten Tomatoes Rating: not available" ));
+      }
+      else {
+        console.log(chalk.yellow.bold("Rotten Tomatoes Rating: " + response.data.Ratings[1].Value));
+        let rottentomatoes = response.data.Ratings[1].Value;
+      }
       // console.log(chalk.yellow.bold("Year: " + response.data.Year));
       console.log(chalk.yellow.bold("Country: " + response.data.Country));
       console.log(chalk.yellow.bold("Language: " + response.data.Language));
@@ -380,7 +444,14 @@ function SearchOMDB(item) {
       let year= "Year: " + response.data.Year;
       let rated= "Rated: " + response.data.Rated;
       let imdbrating="IMDB Rating: " + response.data.imdbRating;
-      let rottentomatoes="Rotten Tomatos Rating: " + response.data.Ratings[1].Value;
+
+      //the rotten tomatoes rating is not always present, so need to handle that or we get a runtime error.
+      if (response.data.Ratings[1] != undefined){
+        let rottentomatoes="Rotten Tomatos Rating: " + response.data.Ratings[1].Value;
+// console.log(chalk.yellow.bold("setting rottentomatoes to 'unknown'."));
+        // rottentomatoes = "unknown";
+      }
+
       let country="Country: " + response.data.Country;
       let language="Language: " + response.data.Language;
       let plot="Plot: " + response.data.Plot;
@@ -390,12 +461,22 @@ function SearchOMDB(item) {
       writeToLog(LogFileName, year + "\n");
       writeToLog(LogFileName, rated + "\n");
       writeToLog(LogFileName, imdbrating + "\n");
-      writeToLog(LogFileName, rottentomatoes + "\n");
+
+      // console.log(chalk.yellow.bold("Type 'rottentomatoes' " + typeof rottentomatoes));
+      if (response.data.Ratings[1] == undefined) {
+        writeToLog(LogFileName, "Rotten Tomatoes Rating: not available." + "\n");
+      }
+      else {
+        writeToLog(LogFileName, "Rotten Tomatoes Rating: " + response.data.Ratings[1].Value + "\n");
+      }
+
       writeToLog(LogFileName, country + "\n");
       writeToLog(LogFileName, language + "\n");
       writeToLog(LogFileName, plot + "\n");
       writeToLog(LogFileName, cast + "\n");
-    }
+      console.log(chalk.yellow.bold("Movie-this command for '" + item + "' completed."));
+      LiriEndMessage();
+      }
   )
 }
 
@@ -406,16 +487,12 @@ function InitLogFile() {
 
   //first, get the path to this app:
   let sPath = process.argv[1] //.split("\\"");
-  // console.log(chalk.yellow.bold("inside InitLogFilePath"));
-  // console.log(chalk.yellow.bold("sPath before mod is: " + sPath));
-  let i = sPath.length-4
+    let i = sPath.length-4
   sPath = sPath.substring(0, i); //get path without app name a the end.
-  // console.log(chalk.yellow.bold("sPath afte substring: " + sPath));
-// sPath = sPath.replace("liri","")
+  // sPath = sPath.replace("liri","")
   
   let logFileName =sPath + "Liri-Log.txt";
 
-  // console.log("log file name is: " + logFileName);
 
   //now create the file and start writng out the header info, use append so existing file info is not over-written
 
@@ -431,15 +508,11 @@ today = today.format('YYYY-MM-DD hh:mm a');
 
 function writeToLog(filename, msg) {
   //this function appends 'msg' to the Liri-Log.txt file.
-  // console.log("the filename is: " + filename);
-  // console.log("the message is: [" + msg + "]");
-
-  fs.appendFile(filename, msg, function(err) {    
-    if (err) {
-      return console.log(err);
-    }
   
-    // console.log("log entries successfully added to: " + filename);
+  fs.appendFile(filename, msg, function(err) {    
+    if (err) { return console.log(err); }  
+
+    
     })
 }
 
@@ -456,11 +529,7 @@ function GetYesNo(prompt) {
 function LiriEndMessage() {
   //displays where the log file is when Liri ends
   let endtime = moment().format("MM/DD/YYYY hh:mm a");
-  writeToLog(LogFileName, "\nLiri session ended at: " + endtime);
+  writeToLog(LogFileName, "\nLiri SESSION ENDED at: " + endtime);
   console.log(chalk.yellow.bold("Your Liri session has ended"));
   console.log(chalk.yellow.bold("A log file of this session is in: " + LogFileName));
 }
-
-
-
-

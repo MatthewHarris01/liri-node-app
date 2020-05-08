@@ -31,3 +31,7 @@ Removed some console.log messages used for testing
 # Version 0.8
 Added code to handle 404 errors for the concert-this search, since it is easy to make a spelling mistake in a band or artist's name.
 
+# Version 1.0
+resolved a bug in OMDB search related to the fact that the Rotten Tomatoes rating is not always present.
+commented out all testing-related console.log statements
+
