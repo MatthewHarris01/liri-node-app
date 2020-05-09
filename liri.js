@@ -27,6 +27,13 @@ var cmdCount = process.argv.length;
 var cmdIn = process.argv.slice(2);
 // console.log("count of args after slice: " + cmdIn.length);
 
+// console.log("CmdIn array length after slicing argv [" +cmdIn.length +"]");
+
+if (cmdIn.length == 0) {
+BadArgumentsMsg("ERROR!! too few arguments! Liri expects at least 2 arguments, a search command and a band, movie, or song name enclosed in quotes.");
+return; }
+
+
 //check for too few arguments -- NOTE: IF THE COMMAND IS "SPOTIFY-THIS" or "movie-this" and there is no song or movie argument, 
 //then default to "The Sign" by Ace of Base (for spotify) and "Mr. Nobody" (for movie-this)
 
@@ -63,7 +70,7 @@ if (cmdIn.length > 2) {
 // console.log("count of process args: " + process.argv.length);
 function ParseArguments() {
 var searchname = process.argv.slice(2);
-process.argv.slice(2);
+// process.argv.slice(2);
 
 
 for (i=0; i < cmdIn.length; i++) {
@@ -143,7 +150,7 @@ function BadArgumentsMsg(msg) {
   console.log(chalk.blue.bold("node liri <command> \'song title or movie name or performing artist\'"));
   console.log("");
   console.log(chalk.blue.bold("For example, to find upcoming concert listings for the band \"Guns and Roses\" from \"Bands In Town\" you would use the  command-line shown below:"));
-   console.log(chalk.green.bold("node liri concert-this \'Death Cab for Cute\'"));
+   console.log(chalk.green.bold("node liri concert-this 'Guns and Roses'"));
    console.log("");
    console.log(chalk.yellow.bold("run Liri with the command Help to get information about what each Liri command does."));
    console.log("");
@@ -510,9 +517,7 @@ function writeToLog(filename, msg) {
   //this function appends 'msg' to the Liri-Log.txt file.
   
   fs.appendFile(filename, msg, function(err) {    
-    if (err) { return console.log(err); }  
-
-    
+    if (err) { return console.log(err); }      
     })
 }
 
